@@ -7,6 +7,7 @@ import { useQueryClient, useMutation, useQuery } from "react-query";
 import LoaderBox from "../../utils/LoaderBox";
 import { deleteArticle, getAllArticles } from "../../axios/article";
 import { formatDate } from "../../utils/formateDate";
+import { apiError } from "../../utils/apiError";
 
 function Article() {
   const queryClient = useQueryClient();
@@ -25,9 +26,7 @@ function Article() {
     errorMessage(error?.message);
   }
   if (mutation.isError) {
-    errorMessage(
-      mutation.error?.response?.data?.message || mutation?.error?.message
-    );
+    apiError(mutation.error);
   }
 
   useEffect(() => {

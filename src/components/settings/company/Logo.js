@@ -1,16 +1,15 @@
 import React, { useEffect, useState } from "react";
 import { useMutation, useQuery } from "react-query";
-import { errorMessage, successMessage } from "../../../utils/Toast";
+import { successMessage } from "../../../utils/Toast";
 import WrapperContent from "../../../WrapperContent";
 import Button from "../../../Helper/Button";
 import { BtnSpinner } from "../../../utils/BtnSpinner";
 import LoaderBox from "../../../utils/LoaderBox";
 import { companyLogo, getCompany } from "../../../axios/setting/settingApi";
+import { apiError } from "../../../utils/apiError";
 const formData = new FormData();
 
 function Logo() {
-  const [image, setImage] = useState("");
-
   const [branch, setBranch] = useState({
     Headerlogo: "",
     Footerlogo: "",
@@ -49,19 +48,19 @@ function Logo() {
 
       mutation.mutate(branch);
     } catch (error) {
-      errorMessage(error.message);
+      apiError(error);
     }
   };
 
   if (isError) {
-    errorMessage(error.message);
+    apiError(error);
   }
 
   if (mutation.isSuccess) {
     successMessage("logo addedd successfully");
   }
   if (mutation.isError) {
-    errorMessage(mutation.error.message);
+    apiError(mutation.error);
   }
 
   useEffect(() => {

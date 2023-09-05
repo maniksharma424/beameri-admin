@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
 import WrapperContent from "../../WrapperContent";
 import { useNavigate, useParams } from "react-router-dom";
 import Button from "../../Helper/Button";
@@ -6,13 +6,12 @@ import { useMutation, useQuery } from "react-query";
 import { errorMessage, successMessage } from "../../utils/Toast";
 import { BtnSpinner } from "../../utils/BtnSpinner";
 import LoaderBox from "../../utils/LoaderBox";
-import { Editor } from "@tinymce/tinymce-react";
 import { editArticle, getArticleSingle } from "../../axios/article";
+import { apiError } from "../../utils/apiError";
 
 function EditArticle() {
   const navigate = useNavigate();
   const { id } = useParams();
-  const editorRef = useRef("");
 
   const [article, setArticle] = useState({
     title: "",
@@ -52,7 +51,7 @@ function EditArticle() {
 
   // handle submit
   const handleSubmitBranch = async () => {
-    const { title, image, description } = article;
+    const { title, description } = article;
     try {
       if (!title || !description) {
         errorMessage("All fields are required!");
@@ -61,21 +60,19 @@ function EditArticle() {
         mutation.mutate(article);
       }
     } catch (error) {
-      errorMessage(error?.response?.data?.message || error?.message);
+      apiError(error);
     }
   };
 
   if (isError) {
-    errorMessage(error?.response?.data?.message || error?.message);
+    apiError(error);
   }
 
   if (mutation.isSuccess) {
     successMessage("Update article successfully");
   }
   if (mutation.isError) {
-    errorMessage(
-      mutation.error?.response?.data?.message || mutation?.error?.message
-    );
+    apiError(mutation.error);
   }
 
   useEffect(() => {

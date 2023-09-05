@@ -6,8 +6,8 @@ import { deleteBranch, getBranch } from "../../axios/branch";
 import { errorMessage, successMessage } from "../../utils/Toast";
 import { useQueryClient, useMutation, useQuery } from "react-query";
 import LoaderBox from "../../utils/LoaderBox";
-import { formatDate } from "../../utils/formateDate";
 import Avatar from "react-avatar";
+import { apiError } from "../../utils/apiError";
 
 function User() {
   const queryClient = useQueryClient();
@@ -23,7 +23,7 @@ function User() {
   });
 
   if (isError) {
-    errorMessage(error?.message);
+    apiError(error);
   }
   if (mutation.isError) {
     errorMessage(

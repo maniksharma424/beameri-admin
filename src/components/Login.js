@@ -4,6 +4,7 @@ import { errorMessage, successMessage } from "../utils/Toast";
 import { BtnSpinner } from "../utils/BtnSpinner";
 import { Axios } from "../axios/axios";
 import LoaderBox from "../utils/LoaderBox";
+import { apiError } from "../utils/apiError";
 
 function Login() {
   const [pass, setShowPass] = useState(false);
@@ -60,7 +61,7 @@ function Login() {
         }
       }
     } catch (error) {
-      errorMessage("Invaid credential");
+      apiError(error);
     } finally {
       setIsLoading(false);
     }

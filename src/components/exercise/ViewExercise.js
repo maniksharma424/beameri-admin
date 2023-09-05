@@ -3,8 +3,8 @@ import WrapperContent from "../../WrapperContent";
 import { useParams } from "react-router-dom";
 import { getBranchSingle } from "../../axios/branch";
 import { useQuery } from "react-query";
-import { errorMessage } from "../../utils/Toast";
 import LoaderBox from "../../utils/LoaderBox";
+import { apiError } from "../../utils/apiError";
 
 function ViewExercise() {
   const { id } = useParams();
@@ -14,10 +14,8 @@ function ViewExercise() {
     () => getBranchSingle(id)
   );
 
-  console.log(data?.data?.data);
-
   if (isError) {
-    errorMessage(error.message);
+    apiError(error);
   }
 
   return (

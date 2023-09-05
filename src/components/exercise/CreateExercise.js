@@ -6,6 +6,7 @@ import { useMutation } from "react-query";
 import { errorMessage, successMessage } from "../../utils/Toast";
 import { BtnSpinner } from "../../utils/BtnSpinner";
 import { createExercise } from "../../axios/exercise";
+import { apiError } from "../../utils/apiError";
 
 function CreateExercise() {
   const navigate = useNavigate();
@@ -53,12 +54,12 @@ function CreateExercise() {
         mutate(branch);
       }
     } catch (error) {
-      errorMessage(error.message);
+      apiError(error);
     }
   };
 
   if (isError) {
-    errorMessage(error.message);
+    apiError(error);
   }
   if (isSuccess) {
     successMessage("Create excersise successfully");

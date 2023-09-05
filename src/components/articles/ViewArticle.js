@@ -6,6 +6,7 @@ import { errorMessage } from "../../utils/Toast";
 import LoaderBox from "../../utils/LoaderBox";
 import { formatDate } from "../../utils/formateDate";
 import { getArticleSingle } from "../../axios/article";
+import { apiError } from "../../utils/apiError";
 
 function ViewArticle() {
   const { id } = useParams();
@@ -16,7 +17,7 @@ function ViewArticle() {
   );
 
   if (isError) {
-    errorMessage(error?.response?.data?.message || error?.message);
+    apiError(error);
   }
 
   return (

@@ -2,10 +2,10 @@ import React from "react";
 import { useQuery } from "react-query";
 import Avatar from "react-avatar";
 import { getBranch } from "../../../axios/branch";
-import { errorMessage } from "../../../utils/Toast";
 import LoaderBox from "../../../utils/LoaderBox";
 import WrapperContent from "../../../WrapperContent";
 import { Link } from "react-router-dom";
+import { apiError } from "../../../utils/apiError";
 
 function UserRole() {
   const { isLoading, isSuccess, isError, error, data } = useQuery(
@@ -14,20 +14,8 @@ function UserRole() {
   );
 
   if (isError) {
-    errorMessage(error?.message);
+    apiError(error);
   }
-  // if (mutation?.isError) {
-  //   errorMessage(error?.message);
-  // }
-
-  // useEffect(() => {
-  //   if (mutation.isSuccess) {
-  //     console.log(mutation.data);
-  //     // setUser();
-  //     // successMessage("Branch deleted successfully");
-  //   }
-  //   // eslint-disable-next-line react-hooks/exhaustive-deps
-  // }, [mutation.isSuccess]);
 
   return (
     <WrapperContent title="Role & Permission">

@@ -1,11 +1,9 @@
 import React, { useEffect } from "react";
 import WrapperContent from "../../WrapperContent";
-import { Link } from "react-router-dom";
 import Button from "../../Helper/Button";
 import { errorMessage, successMessage } from "../../utils/Toast";
 import { useQueryClient, useMutation, useQuery } from "react-query";
 import LoaderBox from "../../utils/LoaderBox";
-import { formatDate } from "../../utils/formateDate";
 import {
   deleteSingleVoiceDbId,
   deleteSingleVoiceId,
@@ -85,41 +83,6 @@ function VoiceClone() {
           }
         });
       });
-
-      // Assuming dbData is the object containing the data you're working with
-      // dbData?.data?.data?.data?.forEach((child) => {
-      //   const matchingItem = voice.find(
-      //     (item) => item.voice_id === child.voice_id
-      //   );
-
-      //   if (matchingItem) {
-      //     const updatedVoice = voice.map((item) =>
-      //       item.voice_id === child.voice_id
-      //         ? {
-      //             ...item,
-      //             active: child.status,
-      //             voice_name: child.voice_name,
-      //             _id: child._id,
-      //           }
-      //         : item
-      //     );
-
-      //     setVoice(updatedVoice);
-      //   } else {
-      //     setVoice((prevVoice) => [
-      //       ...prevVoice,
-      //       {
-      //         voice_id: child.voice_id,
-      //         active: child.status,
-      //         voice_name: child.voice_name,
-      //         _id: child._id,
-      //         name: item.name,
-      //         preview_url: item.preview_url,
-      //         category: item.category,
-      //       },
-      //     ]);
-      //   }
-      // });
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isSuccess, dbData.isSuccess]);

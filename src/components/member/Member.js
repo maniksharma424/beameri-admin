@@ -1,13 +1,12 @@
 import React from "react";
 import WrapperContent from "../../WrapperContent";
 import { Link } from "react-router-dom";
-import Button from "../../Helper/Button";
-import { errorMessage } from "../../utils/Toast";
 import { useQuery } from "react-query";
 import LoaderBox from "../../utils/LoaderBox";
 import Avatar from "react-avatar";
 import { formatDate } from "../../utils/formateDate";
 import { getAllMembers } from "../../axios/member";
+import { apiError } from "../../utils/apiError";
 
 function Member() {
   const { isLoading, isSuccess, isError, error, data } = useQuery(
@@ -16,7 +15,7 @@ function Member() {
   );
 
   if (isError) {
-    errorMessage(error?.message);
+    apiError(error);
   }
 
   return (
@@ -33,13 +32,11 @@ function Member() {
                   <div className="card">
                     <div className="stat-widget-one">
                       <div className="stat-icon dib">
-
                         <Avatar
                           name={item?.firstName + " " + item?.lastName}
                           size="50"
                           round={true}
                         />
-
                       </div>
                       <div className="stat-content dib">
                         {item?.firstName + " " + item?.lastName}{" "}

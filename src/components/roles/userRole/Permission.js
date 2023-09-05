@@ -9,6 +9,7 @@ import { getUserPermission } from "../../../axios/setting/settingApi";
 import { useState } from "react";
 import { updateRole } from "../../../axios/roles/role";
 import { BtnSpinner } from "../../../utils/BtnSpinner";
+import { apiError } from "../../../utils/apiError";
 
 function UserPermission() {
   const { id } = useParams();
@@ -37,11 +38,11 @@ function UserPermission() {
   );
 
   if (user.isError) {
-    errorMessage(user.error?.response?.data?.message || user.error?.message);
+    apiError(user.error);
   }
 
   if (isError) {
-    errorMessage(error?.response?.data?.message || error?.message);
+    apiError(error);
   }
 
   // handle change

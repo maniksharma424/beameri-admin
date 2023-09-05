@@ -8,6 +8,7 @@ import { BtnSpinner } from "../../utils/BtnSpinner";
 import LoaderBox from "../../utils/LoaderBox";
 import { editExercise, getExerciseSingle } from "../../axios/exercise";
 import VideoModel from "../model/VideoModel";
+import { apiError } from "../../utils/apiError";
 
 function EditExercise() {
   const navigate = useNavigate();
@@ -71,12 +72,12 @@ function EditExercise() {
         mutation.mutate({ name, description, image, video, id });
       }
     } catch (error) {
-      errorMessage(error.message);
+      apiError(error);
     }
   };
 
   if (isError) {
-    errorMessage(error.message);
+    apiError(error);
   }
 
   if (mutation.isSuccess) {

@@ -6,6 +6,7 @@ import { useMutation } from "react-query";
 import { errorMessage, successMessage } from "../../utils/Toast";
 import { createBranch } from "../../axios/branch";
 import { BtnSpinner } from "../../utils/BtnSpinner";
+import { apiError } from "../../utils/apiError";
 
 function CreateBranch() {
   const navigate = useNavigate();
@@ -71,12 +72,12 @@ function CreateBranch() {
         mutate(data);
       }
     } catch (error) {
-      errorMessage(error.message);
+      apiError(error);
     }
   };
 
   if (isError) {
-    errorMessage(error?.response?.data?.message || error?.message);
+    apiError(error);
   }
   if (isSuccess) {
     successMessage("Create branch successfully");

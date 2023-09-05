@@ -41,7 +41,7 @@ function AboutCompany() {
   };
 
   if (isError) {
-    errorMessage(error?.message);
+    apiError(error);
   }
   if (mutation.isError) {
     apiError(mutation.error);

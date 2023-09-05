@@ -11,6 +11,7 @@ import {
   getAllAvatar,
   updateStatusAvatar,
 } from "../../axios/avatar/avatar";
+import { apiError } from "../../utils/apiError";
 
 function Avatar() {
   const queryClient = useQueryClient();
@@ -32,17 +33,13 @@ function Avatar() {
   });
 
   if (isError) {
-    errorMessage(error?.message);
+    apiError(error);
   }
   if (mutation.isError) {
-    errorMessage(
-      mutation.error?.response?.data?.message || mutation?.error?.message
-    );
+    apiError(mutation.error);
   }
   if (mutationUpdate.isError) {
-    errorMessage(
-      mutation.error?.response?.data?.message || mutation?.error?.message
-    );
+    apiError(mutation.error);
   }
 
   useEffect(() => {

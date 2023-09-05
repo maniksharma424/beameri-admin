@@ -7,6 +7,7 @@ import { useQueryClient, useMutation, useQuery } from "react-query";
 import LoaderBox from "../../utils/LoaderBox";
 import { deleteExercise, getExercise } from "../../axios/exercise";
 import { formatDate } from "../../utils/formateDate";
+import { apiError } from "../../utils/apiError";
 
 function Exercise() {
   const queryClient = useQueryClient();
@@ -23,12 +24,10 @@ function Exercise() {
   });
 
   if (isError) {
-    errorMessage(error?.message);
+    apiError(error);
   }
   if (mutation.isError) {
-    errorMessage(
-      mutation.error?.response?.data?.message || mutation.error?.message
-    );
+    apiError(mutation.error);
   }
 
   useEffect(() => {

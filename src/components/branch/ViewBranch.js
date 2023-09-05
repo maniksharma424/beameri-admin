@@ -3,10 +3,10 @@ import WrapperContent from "../../WrapperContent";
 import { useParams } from "react-router-dom";
 import { getAllMembersToBranch, getBranchSingle } from "../../axios/branch";
 import { useQuery } from "react-query";
-import { errorMessage } from "../../utils/Toast";
 import LoaderBox from "../../utils/LoaderBox";
 import { formatDate } from "../../utils/formateDate";
 import Avatar from "react-avatar";
+import { apiError } from "../../utils/apiError";
 
 function ViewBranch() {
   const { id } = useParams();
@@ -24,13 +24,11 @@ function ViewBranch() {
   } = useQuery(["branch1", id], () => getAllMembersToBranch(id));
 
   if (memberIsError) {
-    errorMessage(memberError?.response?.data?.message || memberError?.message);
+    apiError(memberError);
   }
   if (isError) {
-    errorMessage(error?.response?.data?.message || error?.message);
+    apiError(error);
   }
-
-  console.log("memberData", memberData);
 
   return (
     <WrapperContent title="View branch">
@@ -146,12 +144,10 @@ function ViewBranch() {
                                   <div className="stat-widget-one">
                                     <div className="stat-icon dib">
                                       <Avatar
-
                                         name={
                                           item?.firstName + " " + item?.lastName
                                         }
                                         size="50"
-
                                       />
                                     </div>
                                     <div className="stat-content dib">

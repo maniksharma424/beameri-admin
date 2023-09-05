@@ -7,6 +7,7 @@ import { errorMessage, successMessage } from "../../utils/Toast";
 import { BtnSpinner } from "../../utils/BtnSpinner";
 import { editBranch, getBranchSingle } from "../../axios/branch";
 import LoaderBox from "../../utils/LoaderBox";
+import { apiError } from "../../utils/apiError";
 
 function EditBranch() {
   const navigate = useNavigate();
@@ -57,21 +58,19 @@ function EditBranch() {
         mutation.mutate(branch);
       }
     } catch (error) {
-      errorMessage(error?.response?.data?.message || error?.message);
+      apiError(error);
     }
   };
 
   if (isError) {
-    errorMessage(error?.response?.data?.message || error?.message);
+    apiError(error);
   }
 
   if (mutation.isSuccess) {
     successMessage("update branch successfully");
   }
   if (mutation.isError) {
-    errorMessage(
-      mutation.error?.response?.data?.message || mutation?.error?.message
-    );
+    apiError(mutation.error);
   }
 
   useEffect(() => {

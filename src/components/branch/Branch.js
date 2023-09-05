@@ -3,11 +3,11 @@ import WrapperContent from "../../WrapperContent";
 import { Link } from "react-router-dom";
 import Button from "../../Helper/Button";
 import { deleteBranch, getBranch } from "../../axios/branch";
-import { errorMessage, successMessage } from "../../utils/Toast";
+import { successMessage } from "../../utils/Toast";
 import { useQueryClient, useMutation, useQuery } from "react-query";
 import LoaderBox from "../../utils/LoaderBox";
-import { formatDate } from "../../utils/formateDate";
 import Avatar from "react-avatar";
+import { apiError } from "../../utils/apiError";
 
 function Branch() {
   const queryClient = useQueryClient();
@@ -23,12 +23,10 @@ function Branch() {
   });
 
   if (isError) {
-    errorMessage(error?.message);
+    apiError(error);
   }
   if (mutation.isError) {
-    errorMessage(
-      mutation.error?.response?.data?.message || mutation?.error?.message
-    );
+    apiError(mutation.error);
   }
 
   useEffect(() => {
@@ -63,9 +61,7 @@ function Branch() {
                     <Link to={`/branch/view/${item._id}`}>
                       <div className="stat-widget-one">
                         <div className="d-flex justify-content-between">
-                      <Avatar name={item?.name} size="50" round={true} />
-
-                    
+                          <Avatar name={item?.name} size="50" round={true} />
 
                           <Avatar src={item?.qrCode} size="50" />
                         </div>

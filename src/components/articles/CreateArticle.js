@@ -1,17 +1,16 @@
-import React, { useRef, useState } from "react";
+import React, { useState } from "react";
 import WrapperContent from "../../WrapperContent";
 import { useNavigate } from "react-router-dom";
 import Button from "../../Helper/Button";
 import { useMutation } from "react-query";
-import { Editor } from "@tinymce/tinymce-react";
 
 import { errorMessage, successMessage } from "../../utils/Toast";
 import { BtnSpinner } from "../../utils/BtnSpinner";
 import { createArticle } from "../../axios/article";
+import { apiError } from "../../utils/apiError";
 
 function CreateArticle() {
   const navigate = useNavigate();
-  const editorRef = useRef("");
 
   const [article, setArticle] = useState({
     name: "",
@@ -64,12 +63,12 @@ function CreateArticle() {
         });
       }
     } catch (error) {
-      errorMessage(error.message);
+      apiError(error);
     }
   };
 
   if (isError) {
-    errorMessage(error?.response?.data?.message || error?.message);
+    apiError(error);
   }
   if (isSuccess) {
     successMessage("Create Article successfully");

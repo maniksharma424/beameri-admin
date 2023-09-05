@@ -5,6 +5,7 @@ import { errorMessage, successMessage } from "../../utils/Toast";
 import { BtnSpinner } from "../../utils/BtnSpinner";
 import { createVoiceClone } from "../../axios/voiceClone";
 import { randomValues } from "../../utils/randomString";
+import { apiError } from "../../utils/apiError";
 
 function VoiceModel({ show, handleClose }) {
   const queryClient = useQueryClient();
@@ -30,17 +31,13 @@ function VoiceModel({ show, handleClose }) {
   };
 
   if (mutation.isError) {
-    errorMessage(mutation.error?.message);
+    apiError(mutation.error);
   }
 
   useEffect(() => {
     if (mutation.isSuccess) {
       console.log(mutation.data?.data?.data);
       if (mutation.data?.status === 200) {
-        // localStorage.setItem(
-        //   "audio",
-        //   JSON.stringify(mutation.data?.data?.data?.voice_id)
-        // );
         successMessage("audio file successfully uploaded");
         window.location.reload();
         handleClose();

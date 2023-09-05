@@ -1,18 +1,27 @@
 import React from "react";
 import WrapperContent from "../../WrapperContent";
-import { errorMessage } from "../../utils/Toast";
 import { useQuery } from "react-query";
 import LoaderBox from "../../utils/LoaderBox";
 import { dashboad } from "../../axios/dashboard/dashboad";
+import { apiError } from "../../utils/apiError";
 
 function Dashboard() {
   const { isLoading, isSuccess, isError, error, data } = useQuery(
-    ["branch", "exercise", "member", "user", "article"],
+    [
+      "branch",
+      "exercise",
+      "member",
+      "user",
+      "article",
+      "avatar",
+      "voice",
+      "voice11",
+    ],
     dashboad
   );
 
   if (isError) {
-    errorMessage(error?.message);
+    apiError(error);
   }
 
   return (

@@ -57,17 +57,6 @@ function NewPassword() {
                 <div className="login-form">
                   <h4>Change Password</h4>
 
-                  {/*     <div className="my-3">
-                    {passKey !== "" && (
-                      <>
-                        <h6>
-                          Your templated password please reset after login :{" "}
-                        </h6>
-                        {passKey}
-                      </>
-                    )}
-                  </div> */}
-
                   <form onSubmit={handleSubmit}>
                     <div className="form-group">
                       <label>Email address</label>

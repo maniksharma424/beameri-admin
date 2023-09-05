@@ -9,6 +9,7 @@ import {
   getCompany,
 } from "../../../axios/setting/settingApi";
 import LoaderBox from "../../../utils/LoaderBox";
+import { apiError } from "../../../utils/apiError";
 
 function SocialMedia() {
   const queryClient = useQueryClient();
@@ -68,12 +69,10 @@ function SocialMedia() {
   }, [mutation.isSuccess]);
 
   if (mutation.isError) {
-    errorMessage(
-      mutation.error?.response?.data?.message || mutation.error?.message
-    );
+    apiError(mutation.error);
   }
   if (isError) {
-    errorMessage(error?.response?.data?.message || error?.message);
+    apiError(error);
   }
   useEffect(() => {
     // use query
