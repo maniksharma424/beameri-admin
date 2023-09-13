@@ -7,6 +7,7 @@ export const getAllArticles = async () => {
   return await Axios.get("/api/article/get-articles", {
     headers: {
       Authorization: `Bearer ${token}`,
+      
     },
   });
   
