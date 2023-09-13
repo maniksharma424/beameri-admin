@@ -9,6 +9,7 @@ export const getAllArticles = async () => {
       Authorization: `Bearer ${token}`,
     },
   });
+  
 };
 
 export const getArticleSingle = async (id) => {
