@@ -14,6 +14,7 @@ export const getAllArticles = async () => {
 };
 
 export const getArticleSingle = async (id) => {
+  
   return await Axios.get(`/api/article/get-article/${id}`, {
     headers: {
       Authorization: `Bearer ${token}`,
